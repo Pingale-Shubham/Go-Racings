@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        checkConnection(); // Call the function when the page loads
+      });
+  
+      function checkConnection() {
+        $.ajax({
+          url: "gRconnection.php",
+          type: "GET",
+          success: function (response) {
+            $("#connectionStatus").html(response);
+          },
+          error: function (xhr, status, error) {
+            console.error(error);
+          }
+        });
+      }
+    </script>
+    <title>GoRacings - Speed to win</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="assets/css/login.css">
+
+  </head>
+
+<body>
+  
+  <!-- ***** Preloader Start ***** -->
+  <!-- <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div> -->
+  <!-- ***** Preloader End ***** -->
+
+  <div class="sub-header-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-8">
+          <!-- ***** Logo Start ***** -->
+          <div class="logo">
+            <a href="index.html" class="logo">
+              <img src="../goracings/images/goracingslogo.png" alt="Go Race">
+            </a>
+          </div>
+          <!-- ***** Logo End ***** -->
+        </div>
+        <div class="col-lg-4 col-md-4">
+          <p id="num">Help Number. : +91 02040008444</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="index.html" class="active">Home</a></li>
+                      <li><a href="properties.html">Services</a></li>
+                      <li><a href="property-details.html">Galary</a></li>
+                      <li><a href="contact.html">Racing Norms</a></li>
+                      <li><a href="login.html"><i class="fa fa-user"></i> login/Register</a></li>
+                  </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** second sub Headerr Area start ***** -->
+  <div class="sub-header-2">
+    <div class="container">
+      <div class="connect" id="connectionStatus">
+        <!-- Site is under maintenance -->
+      </div>
+      <!-- <div class="king">
+        <img src="../goracings/images/The Great Maratha.jpg" alt="The Great Maratha">
+      </div> -->
+    </div>
+  </div>
+  <!-- ***** second sub Headerr Area End ***** -->
+
+ <!-- login form -->
+
+ <div class="login-container">
+  <h2>Login</h2>
+  <div class="login-options">
+      <button onclick="showOTPForm()">Login with OTP</button>
+      <button onclick="showEmailForm()">Login with Email</button>
+  </div>
+  <div id="otp-form" style="display: none;">
+      <h3>Login with OTP</h3>
+      <form action="login.php" method="POST">               
+                <input type="tel" id="UserMobileNumber" name="UserMobileNumber" placeholder="Enter Mobile Number" required>
+                  <button type="button" id="send-otp-btn" onclick="sendOTP()">Send OTP</button>
+                  <input type="text" id="UserMobileNumberOTP" name="UserMobileNumberOTP" placeholder="Enter Received OTP" required>
+                  <button type="button" onclick="" id="verify_otp_button">Verify OTP</button>
+        <button type="submit">Login</button>
+        <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+    </form>
+    
+  </div>
+  <div id="email-form" style="display: none;">
+      <h3>Login with Email</h3>
+      <form action="login.php" method="POST">
+        <table>
+            <tr>
+                <td><label for="UserEmailID">Email:</label></td>
+                <td><input type="email" id="UserEmailID" name="UserEmailID" placeholder="Enter your email address" required></td>
+            </tr>
+            <tr>
+                <td><label for="UserEmailPasscode">Password:</label></td>
+                <td><input type="password" id="UserEmailPasscode" name="UserEmailPasscode" placeholder="Enter your password" required></td>
+            </tr>
+        </table>
+
+          
+          <div class="additional-options">
+              <div>
+                  <a href="#">Forgot Password?</a>
+              </div>
+          </div>
+          <button type="submit">Login</button>
+          <p>Don't have an account? <a href="register.html">Sign Up</a></p>
+      </form>
+  </div>
+</div>
+
+
+
+  <footer>
+    <div class="footer-container">
+      <div class="col-lg-8">
+        <p>Copyright © 2048 Villa Agency Co., Ltd. All rights reserved. 
+        
+        Design: <a rel="nofollow" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+    <!-- Scripts -->
+
+    <script>
+      function showOTPForm() {
+          document.getElementById('otp-form').style.display = 'block';
+          document.getElementById('email-form').style.display = 'none';
+      }
+  
+      function showEmailForm() {
+          document.getElementById('otp-form').style.display = 'none';
+          document.getElementById('email-form').style.display = 'block';
+      }
+      function showVerifyButton() {
+          var mobileNumber = document.getElementById('mobile-number').value;
+          var verifyButton = document.getElementById('verify-button');
+          if (mobileNumber.length > 0) {
+              verifyButton.style.display = 'block';
+          } else {
+              verifyButton.style.display = 'none';
+          }
+      }
+  
+      function sendOTP() {
+          // Implement OTP sending functionality here
+          alert("OTP sent to your mobile number!");
+      }
+      </script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/counter.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  </body>
+</html>
