@@ -1,0 +1,299 @@
+.login-container {    
+  width: 500px;
+  min-height: 450px;
+  max-height: 550px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  position: relative;
+  padding: 40px 30px;
+  margin: 60px auto 100px;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto; 
+}
+
+.login-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.login-options button {
+    flex: 1;
+    padding: 10px;
+    background-color: #7d2ae8;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.password-container {
+    position: relative;
+    display: inline-block;
+    width: calc(100% );
+  }
+  .password-toggle {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .password-toggle img {
+    width: 20px; /* Adjust size as needed */
+    height: auto;
+    margin-bottom: 15px;
+    margin-right: 3px;
+    vertical-align: middle;
+  }
+
+  /* Styling for captcha container */
+  .captchafield {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styling for captcha response */
+  #ae_captcha_api {
+    display: flex;
+  }
+  .captchaCheckbox {
+    align-items: center;
+    justify-content: center;
+  }
+  #captchaCheckbox {
+    margin: 5px;
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    font-weight: bold;
+    color: darkgreen;
+  }
+  
+
+.login-options button:first-child {
+    margin-right: 10px;
+}
+.add-options {
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+
+.add-options a {
+    text-decoration: underline;
+    color: #007bff; /* You can change the color as per your design */
+}
+
+.add-options a:hover {
+    color: black;
+}
+
+  #otp-form input[type="tel"],
+  #otp-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  #otp-form button[type="button"],
+  #otp-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #7d2ae8; /* Green */
+    color: white;
+  }
+  #otp-form button[type="button"]:hover,
+  #otp-form button[type="submit"]:hover {
+    background-color: #5b13b9; /* Darker green on hover */
+  }
+#email-form {
+    /* display: none; */
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#email-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#email-form button {
+   width: 100%; 
+  padding: 10px;
+  
+  margin-bottom: 30px;
+  background-color: #7d2ae8;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+
+#otp-form button:hover,
+#email-form button:hover {
+    background-color: #5b13b9;
+}
+
+/* Reset default table styles */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+/* Style form labels */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-right: 8px;
+}
+
+/* Style form inputs */
+input[type="tel"],
+input[type="text"] {
+    width: calc(80% - 120px); /* Adjust width to accommodate buttons */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Style buttons within table cells */
+td .verifycaptcha{
+  display: flex;
+  top: 50%;
+  left: 50%;
+  justify-content: center;
+}
+td .verifycaptcha button {
+    margin-top: 10px;
+    padding: 9px 14px;
+    text-wrap: nowrap;
+    background-color: #7d2ae8;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+td .verifycaptcha button:hover {
+    background-color: #5b13b9;
+}
+
+/* Style login button */
+button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #7d2ae8;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #5b13b9;
+}
+
+/* Style paragraph text */
+p {
+    text-align: center;
+}
+
+/* Center the form within its container */
+form {
+    max-width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#signingup{
+    margin-top: -20px;
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 600px) {
+  .login-container {
+    max-width: 450px;
+    width: 95%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    align-items: center;
+  }
+
+  #email-form input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Styling for captcha container */
+.captchafield {
+  width: 80%;
+  display: flex;
+  
+}
+
+/* Styling for captcha response */
+#ae_captcha_api {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+}
+
+/* Responsive adjustments for table */
+@media only screen and (max-width: 767px) {
+  table {
+    width: 100%;
+  }
+  td,
+  th {
+    padding: 0;
+    margin: 0;
+  }
+  tr {
+    display: block;
+    margin: 0;
+  }
+  td {
+    display: block;
+    margin: 0;
+  }
+
+}

@@ -1,0 +1,93 @@
+.forgot-container {
+    max-width: 600px;
+    width: 90%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    margin: 30px auto;
+    padding: 40px 30px;
+    border-radius: 10px;
+  }
+  
+  .forgot-container h3 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  #email-form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  #email-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  #email-form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #7d2ae8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #email-form button:hover {
+    background-color: #5b13b9;
+  }
+  
+  /* Reset default table styles */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  /* Style form labels */
+  label {
+    font-weight: bold;
+    font-size: 20px;
+    width: 100%;
+    align-items: center;
+    padding-left: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Style form inputs */
+  input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Style forgot button */
+  button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: #7d2ae8;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #5b13b9;
+  }
+  
+  /* Center the form within its container */
+  form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  

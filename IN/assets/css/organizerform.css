@@ -1,0 +1,169 @@
+
+.organizer-container {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  overflow-y: auto;
+  max-height: 600px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+}
+/* Heading styles */
+.organizer-container h5 {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+/* Prize section styles */
+.organizer-container .prize {
+  display: flex;
+  align-items: center;
+  padding: 0;
+  padding-right: 40px;
+  justify-content: space-evenly;
+}
+/* Map and signature styles */
+.organizer-container #map,
+.organizer-container #signature-pad {
+  width: calc(100% - 22px);
+  height: 200px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+/* Common styles for form elements */
+label{
+  display: block;
+  padding: 10px 0;  
+}
+select,
+input[type="text"],
+input[type="datetime-local"],
+input[type="file"],
+textarea {
+  font-family: 'Poppins', sans-serif;
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 5px 0;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #000;
+  
+}
+
+/* Style the select dropdown arrow */
+option,
+optgroup{
+  width: 100%;
+  color: #161414;
+  overflow-y: auto;
+}
+#other_race {
+  margin-top: 10px;
+  display: none;
+}
+
+/* Style the select dropdown on hover */
+select:hover {
+  border: 2px solid #888888;
+  /* background-color: #ccc; */
+}
+
+/* button style */
+button[type="submit"]{
+  padding: 10px 20px;
+  background-color: #7d2ae8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 10px auto; /* Improved spacing */
+}
+
+/* Button hover effect */
+button[type="submit"]:hover,
+.purple-button:hover {
+  background-color: #5217db;
+}
+/* file input */
+.file-input {
+  margin-bottom: 15px;
+}
+
+/* submit document */
+.purple-button {
+  padding: 10px 20px;
+  background-color: #7d2ae8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 5px 0;
+}
+
+/* Styles for the container */
+.aproval-slider {
+  width: 100%;
+}
+
+/* Styles for the slider */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 8%;
+  height: 10px;
+  background: #ccc;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  border-radius: 15px;
+  margin: 6px 0 ;
+}
+
+/* Styles for the slider thumb */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #7d2ae8;
+  cursor: pointer;
+  border-radius: 50%;
+}
+/* Hover effect for the slider thumb */
+.slider::-webkit-slider-thumb:hover {
+  background: #5217db;
+}
+/* Active (pressed) state for the slider thumb */
+.slider::-webkit-slider-thumb:active {
+  background: #ff0800;
+}
+
+/* Add a media query for responsiveness */
+@media only screen and (max-width: 600px) {
+  .organizer-container {
+    width: 100%;
+    padding: 15px;
+  }
+  .organizer-container .prize {
+    padding-right: 10px; /* Adjust spacing */
+  }
+
+  select,
+  input[type="text"],
+  input[type="datetime-local"],
+  input[type="file"],
+  textarea {
+    width: calc(100% - 16px); /* Adjusted width */
+  }
+}

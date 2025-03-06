@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .organizer-container #signature-pad {
+            width: calc(100% - 22px);
+            height: 200px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="organizer-container">
+        <label for="signature">Signature:</label>
+        <canvas id="signature-pad"></canvas>
+        <input type="hidden" id="signature_image_data" name="signature_image_data">
+    </div>
+    <button onclick="captureSignature()">Capture Signature</button>
+
+    <script>
+        var canvas = document.getElementById('signature-pad');
+        var ctx = canvas.getContext('2d');
+        var drawing = false;
+        var prevX = 0;
+        var prevY = 0;
+
+        function getPosition(event) {
+            if (event.touches && event.touches.length > 0) {
+                return {
+                    x: event.touches[0].clientX - canvas.getBoundingClientRect().left,
+                    y: event.touches[0].clientY - canvas.getBoundingClientRect().top
+                };
+            }
+            return {
+                x: event.clientX - canvas.getBoundingClientRect().left,
+                y: event.clientY - canvas.getBoundingClientRect().top
+            };
+        }
+
+        function startDrawing(event) {
+            drawing = true;
+            var pos = getPosition(event);
+            prevX = pos.x;
+            prevY = pos.y;
+        }
+
+        function draw(event) {
+            if (!drawing) return;
+            var pos = getPosition(event);
+            ctx.beginPath();
+            ctx.moveTo(prevX, prevY);
+            ctx.lineTo(pos.x, pos.y);
+            ctx.stroke();
+            prevX = pos.x;
+            prevY = pos.y;
+        }
+
+        function stopDrawing() {
+            drawing = false;
+        }
+
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', draw);
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseleave', stopDrawing);
+
+        // Touch events for mobile
+        canvas.addEventListener('touchstart', function(event) {
+            event.preventDefault();
+            startDrawing(event);
+        }, { passive: false });
+        canvas.addEventListener('touchmove', function(event) {
+            event.preventDefault();
+            draw(event);
+        }, { passive: false });
+        canvas.addEventListener('touchend', function(event) {
+            event.preventDefault();
+            stopDrawing();
+        }, { passive: false });
+
+        function captureSignature() {
+            var signatureCanvas = document.getElementById('signature-pad');
+            var signatureData = signatureCanvas.toDataURL(); // Convert canvas content to data URL
+            document.getElementById('signature_image_data').value = signatureData; // Store data URL in hidden input field
+        }
+    </script>
+</body>
+</html>

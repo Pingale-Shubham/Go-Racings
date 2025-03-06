@@ -1,0 +1,75 @@
+
+MessageBox.Show("Rule Run", "Caption")
+'Parameter("TLAC_TFR_1_BAY:1", "No_Of_Blades")
+intNumberOfBlades = Parameter("TLAC_TFR_1_BAY:1", "No_Of_Blades") + 1
+sglFrameLength = Parameter("TLAC_TFR_1_BAY:1", "louver_length")
+
+Dim intNumberOfBraces As Integer
+
+If sglFrameLength < 54 Then
+	intNumberOfBraces = 0
+ElseIf sglFrameLength >= 54 And sglFrameLength < 99.5 Then 
+	intNumberOfBraces = 1
+ElseIf sglFrameLength >= 99.5 And sglFrameLength < 145 Then 
+	intNumberOfBraces = 2
+ElseIf sglFrameLength >= 145 Then 
+	intNumberOfBraces = 3
+End If
+		
+
+		
+If intNumberOfBraces = 0 Then
+	BraceLocation = "NONE"
+Else
+	sglBladeCount = intNumberOfBlades / intNumberOfBraces
+	
+	If sglBladeCount = Int(intNumberOfBlades / intNumberOfBraces) Then
+		
+		If intNumberOfBraces = 1 Then
+			
+			If Int(CDbl(Format(intNumberOfBlades / 2, "#####0"))) = Int(intNumberOfBlades / 2) Then
+				BraceLocation = "-" & Trim(Str(intNumberOfBlades / 2)) & "-" & Trim(Str(intNumberOfBlades / 2)) & "-"
+			Else
+				BraceLocation = "-" & Trim(Str(Int(intNumberOfBlades / 2))) & "-" & Trim(Str(Int(intNumberOfBlades / 2) + 1)) & "-"
+			End If
+			
+		ElseIf intNumberOfBraces = 2 Then 
+			
+			If intNumberOfBlades / 3 = Int(intNumberOfBlades / 3) Then
+				BraceLocation = "-" & Trim(Str(intNumberOfBlades / 3)) & "-" & Trim(Str(intNumberOfBlades / 3)) & "-" & Trim(Str(intNumberOfBlades / 3)) & "-"
+			Else
+				BraceLocation = "-" & Trim(Str(Int(intNumberOfBlades / 3))) & "-" & Trim(Str(Int(intNumberOfBlades / 3) + 1)) & "-" & Trim(Str(intNumberOfBlades - (Int(intNumberOfBlades / 3) + Int(intNumberOfBlades / 3) + 1))) & "-"
+			End If
+			
+		ElseIf intNumberOfBraces = 3 Then 
+			
+			BraceLocation = "-" & Trim(Str(intNumberOfBlades / 4)) & "-" & Trim(Str(intNumberOfBlades / 4)) & "-" & Trim(Str(intNumberOfBlades / 4) & "-" & Str(intNumberOfBlades / 4)) & "-"
+			
+		End If
+		
+	Else
+		
+		If intNumberOfBraces = 1 Then
+			
+			BraceLocation = "-" & Trim(Str(Int(intNumberOfBlades / 2) + 1)) & "-" & Trim(Str(intNumberOfBlades - (Int(intNumberOfBlades / 2) + 1))) & "-"
+			
+		ElseIf intNumberOfBraces = 2 Then 
+			
+			BraceLocation = "-" & Trim(Str(Int(intNumberOfBlades / 3) + 1)) & "-" & Trim(Str(Int(intNumberOfBlades / 3))) & "-" & Trim(Str(intNumberOfBlades - (Int(intNumberOfBlades / 3) + Int(intNumberOfBlades / 3) + 1))) & "-"
+			
+		ElseIf intNumberOfBraces = 3 Then 
+			
+			BraceLocation = "-" & Trim(Str(Int(intNumberOfBlades / 4) + 1)) & "-" & Trim(Str(Int(intNumberOfBlades / 4))) & "-" & Trim(Str(Int(intNumberOfBlades / 4))) & "-" & Trim(Str(intNumberOfBlades - ((Int(intNumberOfBlades / 4) + 1) + (Int(intNumberOfBlades / 4) * 2)))) & "-"
+			
+		End If
+		
+	End If
+	
+	
+End If
+
+MessageBox.Show("Rule Run"& BraceLocation, "Caption")
+
+BRACE_PATTERN = BraceLocation
+		
+iLogicVb.UpdateWhenDone = True

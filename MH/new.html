@@ -1,0 +1,901 @@
+
+<?php
+
+// Start the session
+session_start();
+
+if (isset($_SESSION['LECaptcha']) && $_SESSION['LECaptcha'] === "yes") {
+  $emailCaptcha = true;
+} else {
+  $error_message = "User need to fill correct catcha.";
+  $emailCaptcha = false;
+}
+
+$color = "brown";
+// Check if the session variable is set
+if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && $emailCaptcha === true) {
+
+  $LogInshowButton = true;
+  $LogInWith = $_SESSION["loginCredential"];
+
+  $error_message = "Welcome to GoRacings.";
+
+  // JavaScript code to create a popup alert with yellow color
+  echo '<script>';
+  echo 'setTimeout(function() {';
+  echo '    var alertMessage = document.createElement("div");';
+  echo '    alertMessage.innerHTML = "' . $error_message . '";';
+  echo '    alertMessage.style.backgroundColor = "yellow";'; // Set background color to yellow
+  echo '    alertMessage.style.color = "black";'; // Set text color to black
+  echo '    alertMessage.style.padding = "10px";'; // Add padding for better visibility
+  echo '    alertMessage.style.position = "fixed";'; // Position the alert message
+  echo '    alertMessage.style.top = "0";'; // Position at the top of the page
+  echo '    alertMessage.style.left = "50%";'; // Position horizontally in the middle
+  echo '    alertMessage.style.transform = "translateX(-50%)";'; // Center horizontally
+  echo '    alertMessage.style.zIndex = "9999";'; // Set z-index to ensure it's on top of other elements
+  echo '    document.body.appendChild(alertMessage);'; // Append the alert message to the body
+  echo '    setTimeout(function() {';
+  echo '        alertMessage.remove();'; // Remove the alert message after 15 seconds
+  echo '    }, 15 * 1000);'; // Display alert for 15 seconds (15 * 1000 milliseconds)
+  echo '}, 100);'; // Delay alert display by 100 milliseconds to ensure it's shown after page load
+  echo '</script>';
+
+} else {
+  $LogInshowButton = false;
+
+  if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === false) {
+    $error_message = "Use correct credentials.";
+  } else {
+    $error_message = "User must be login.";
+  }
+
+  // JavaScript code to display styled popup alert
+  echo '<script>';
+  echo 'setTimeout(function() {';
+  echo '    var alertMessage = document.createElement("div");';
+  echo '    alertMessage.innerHTML = "' . $error_message . '";';
+  echo '    alertMessage.style.backgroundColor = "yellow";'; // Set background color to yellow
+  echo '    alertMessage.style.color = "black";'; // Set text color to black
+  echo '    alertMessage.style.padding = "10px";'; // Add padding for better visibility
+  echo '    alertMessage.style.fontSize = "15px";';
+  echo '    alertMessage.style.position = "fixed";'; // Position the alert message
+  echo '    alertMessage.style.top = "0";'; // Position at the top of the page
+  echo '    alertMessage.style.left = "50%";'; // Position horizontally in the middle
+  echo '    alertMessage.style.transform = "translateX(-50%)";'; // Center horizontally
+  echo '    alertMessage.style.zIndex = "9999";'; // Set z-index to ensure it's on top of other elements
+  echo '    document.body.appendChild(alertMessage);'; // Append the alert message to the body
+  echo '    setTimeout(function() {';
+  echo '        alertMessage.remove();'; // Remove the alert message after 15 seconds
+  echo '    }, 15 * 1000);'; // Display alert for 15 seconds (15 * 1000 milliseconds)
+  echo '}, 100);'; // Delay alert display by 100 milliseconds to ensure it's shown after page load
+  echo '</script>';
+  
+  header("Location: index.php");
+exit();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      checkConnection(); // Call the function when the page loads
+    });
+
+    function checkConnection() {
+      $.ajax({
+        url: "gRconnection.php",
+        type: "GET",
+        success: function (response) {
+          $("#connectionStatus").html(response);
+        },
+        error: function (xhr, status, error) {
+          console.error(error);
+        }
+      });
+    }
+  </script>
+  <style>
+        .dot {
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        .connected {
+            background-color: green;
+        }
+        .disconnected {
+            background-color: red;
+        }
+    </style>
+  <script>
+    $(document).ready(function () {
+      $('.dropdown-service, .dropdown-norms').click(function (event) {
+        event.preventDefault();
+        alert('You need to first login to access this ');
+      });
+    });
+  </script>
+  <title>GoRacings - Speed to win</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  // <link rel="stylesheet" href="assets/css/profile.css">    
+  <!-- <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" /> -->
+
+</head>
+
+<body>
+
+  <div class="sub-header-1">
+    <div class="logo">
+      <a href="index.php">
+        <img src="images/goracingslogo.png" alt="Go Race"></a>
+      <h4><span id="go">Go</span><span id="race">Racings</span></h4>
+    </div>
+    <div class="help-num">
+      <p>Help Number. : +91 02040008444</p>
+    </div>
+  </div>
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+      <nav class="main-nav">
+        <!-- ***** Menu Start ***** -->
+        <ul class="nav">
+          <li><a href="index.php">Home</a></li>
+          <li class="dropdown-service">
+            <button>Services</button>
+            <div class="dropdown-menu">
+              <a href="#">Race Audience Ticket Booking</a>
+              <a href="#">Race Audience Ticket Canelation</a>
+              <a href="#">Race Participents Participates</a>
+              <a href="#">Race Participation Cancel</a>
+              <a href="#">Race Organizer Organize Race</a>
+              <a href="#">Race Organizer Cancel Race</a>
+              <a href="#">Race Advertising</a>
+            </div>
+          </li>
+          <li><a href="gallery.php">Gallery</a></li>
+          <li class="dropdown-norms">
+            <button>Racing Norms</button>
+            <div class="dropdown-menu">
+              <a href="racingnorms.php">Racing Norms</a>
+            </div>
+          </li>
+          <li><a href="login.php"><i class="fa fa-user"></i> Login/Register</a></li>
+        </ul>
+        <a class='menu-trigger'>
+          <span>Menu</span>
+        </a>
+        <!-- ***** Menu End ***** -->
+      </nav>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** second sub Header Area start ***** -->
+  <div class="container-fluid sub-header-2">
+    <div class="menu-bar" onclick="toggleMenubar()"><i class="fa fa-bars"></i></div>
+    <div class="columns">
+      <div class="header-column-1">
+        <h6><a href="audience.php">Audience</a></h6>
+      </div>
+      <div class="header-column-2">
+        <h6><a href="participants.php" >Participants</a></h6>
+      </div>
+      <div class="header-column-3">
+        <h6><a href="organizer.php">Organizer</a></h6>
+      </div>
+      <div class="header-column-4">
+        <h6><a href="profile.php" class="sub-header-2active">User Profile</a></h6>
+      </div>
+    </div>
+    <script>
+      // JavaScript function to toggle the display of the menu items
+      function toggleMenubar() {
+        var menubar = document.querySelector('.columns');
+        if (menubar.style.display === 'flex') {
+          menubar.style.display = 'none';
+        } else {
+          menubar.style.display = 'flex';
+        }
+      }
+    </script>
+    <div class="header-column-end">
+      <?php if ($LogInshowButton): ?>
+        <div class="dropdownIO">
+          <button>Welcome,</button>
+          <div class="dropdownIO-options">
+            <a href="lUser.php"><i class="fa fa-user"></i> Login With <span><?php echo $LogInWith; ?></span></a>
+            <a href="logout.php"><i class="fa fa-sign-out" style="padding: 5px;"></i>Logout</a>
+          </div>
+        </div>
+      <?php endif; ?>
+    </div>
+  </div>
+  <!-- ***** second sub Headerr Area End ***** -->
+
+  <script src="./assets/js/profile.js"></script>
+  
+  <!-- profile area start -->
+  <div class="profile-area">
+    <div class="profile-navbar">
+      <ul>
+        <li><a href="#Organizer-Prize" class="tab-link">Organizer Prize Management</a></li>
+        <li><a href="#Participant-Prize" class="tab-link">Participant Prize Management</a></li>
+        <li><a href="#profile-info" class="tab-link">Profile</a></li>
+        <li><a href="#organizer-info" class="tab-link">Organizer management</a></li>
+        <li><a href="#participants-info" class="tab-link">Participants management</a></li>
+        <li><a href="#audience-info" class="tab-link">Audience management</a></li>
+      </ul>
+    </div>
+
+    <div class="O-Prize-management">
+      <div id="Organizer-Prize" class="tab-content">
+        <table>
+          <tr>
+            <th>Sr. No.</th>
+            <th>Race Name</th>
+            <th>Race Location Latitude</th>
+            <th>Race Location Longitude</th>
+            <th>Race Date and Time</th>
+            <th>Book Race Organizers Alloted Token Number</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Marathon</td>
+            <td>40.712776</td>
+            <td>-74.005974</td>
+            <td>2024-06-01 08:00:00</td>
+            <td>ABC123</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Triathlon</td>
+            <td>34.052235</td>
+            <td>-118.243683</td>
+            <td>2024-07-15 07:00:00</td>
+            <td>XYZ789</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Cycling Race</td>
+            <td>51.507351</td>
+            <td>-0.127758</td>
+            <td>2024-08-20 09:00:00</td>
+            <td>LMN456</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>5K Run</td>
+            <td>35.689487</td>
+            <td>139.691711</td>
+            <td>2024-09-05 06:30:00</td>
+            <td>OPQ321</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>10K Run</td>
+            <td>48.856613</td>
+            <td>2.352222</td>
+            <td>2024-10-10 07:00:00</td>
+            <td>RST654</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Half Marathon</td>
+            <td>55.755825</td>
+            <td>37.617298</td>
+            <td>2024-11-15 08:00:00</td>
+            <td>UVW987</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Fun Run</td>
+            <td>-33.868820</td>
+            <td>151.209290</td>
+            <td>2024-12-25 09:00:00</td>
+            <td>XYZ654</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+        </table>
+        <!-- Details Structure -->
+        <div id="edit-Details" class="Details">
+          <div class="Details-content">
+            <div class="Details-header">
+              <span class="close">&times;</span>
+              <h2>Edit Race Details</h2>
+            </div>
+            <div class="Details-body">
+              <form id="editForm">
+                <label for="raceName">Race Name:</label>
+                <input type="text" id="raceName" name="raceName" readonly><br><br>
+                <label for="raceLatitude">Race Location Latitude:</label>
+                <input type="text" id="raceLatitude" name="raceLatitude" readonly><br><br>
+                <label for="raceLongitude">Race Location Longitude:</label>
+                <input type="text" id="raceLongitude" name="raceLongitude" readonly><br><br>
+                <label for="raceDateTime">Race Date and Time:</label>
+                <input type="datetime-local" id="raceDateTime" name="raceDateTime" readonly><br><br>
+                <label for="raceToken">Book Race Organizers Allotted Token Number:</label>
+                <input type="text" id="raceToken" name="raceToken" readonly><br><br>
+              </form>
+            </div>
+            <div class="details-footer">
+              <button type="button" id="saveChanges">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="P-Prize-management">
+      <div id="Participant-Prize" class="tab-content">
+        <table>
+          <tr>
+            <th>Sr. No.</th>
+            <th>Race Name</th>
+            <th>Race Location Latitude</th>
+            <th>Race Location Longitude</th>
+            <th>Race Date and Time</th>
+            <th>Book Race Organizers Alloted Token Number</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Marathon</td>
+            <td>40.712776</td>
+            <td>-74.005974</td>
+            <td>2024-06-01 08:00:00</td>
+            <td>ABC123</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Triathlon</td>
+            <td>34.052235</td>
+            <td>-118.243683</td>
+            <td>2024-07-15 07:00:00</td>
+            <td>XYZ789</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Cycling Race</td>
+            <td>51.507351</td>
+            <td>-0.127758</td>
+            <td>2024-08-20 09:00:00</td>
+            <td>LMN456</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>5K Run</td>
+            <td>35.689487</td>
+            <td>139.691711</td>
+            <td>2024-09-05 06:30:00</td>
+            <td>OPQ321</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>10K Run</td>
+            <td>48.856613</td>
+            <td>2.352222</td>
+            <td>2024-10-10 07:00:00</td>
+            <td>RST654</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Half Marathon</td>
+            <td>55.755825</td>
+            <td>37.617298</td>
+            <td>2024-11-15 08:00:00</td>
+            <td>UVW987</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Fun Run</td>
+            <td>-33.868820</td>
+            <td>151.209290</td>
+            <td>2024-12-25 09:00:00</td>
+            <td>XYZ654</td>
+            <td><button class="edit-btn">Edit</button></td>
+          </tr>
+        </table>
+        <!-- Modal Structure -->
+        <div id="editDetails" class="Details">
+          <div class="details-content">
+            <div class="details-header">
+              <span class="close">&times;</span>
+              <h2>Edit Race Details</h2>
+            </div>
+            <div class="details-body">
+              <form id="editForm">
+                <label for="raceName">Race Name:</label>
+                <input type="text" id="raceName" name="raceName" readonly><br><br>
+                <label for="raceLatitude">Race Location Latitude:</label>
+                <input type="text" id="raceLatitude" name="raceLatitude" readonly><br><br>
+                <label for="raceLongitude">Race Location Longitude:</label>
+                <input type="text" id="raceLongitude" name="raceLongitude" readonly><br><br>
+                <label for="raceDateTime">Race Date and Time:</label>
+                <input type="datetime-local" id="raceDateTime" name="raceDateTime" readonly><br><br>
+                <label for="raceToken">Book Race Organizers Allotted Token Number:</label>
+                <input type="text" id="raceToken" name="raceToken" readonly><br><br>
+              </form>
+            </div>
+            <div class="Details-footer">
+              <button type="button" id="saveChanges">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const details = document.getElementById('edit-Details');
+    const closeDetails = document.querySelector('.Details-header .close');
+    const saveChangesButton = document.getElementById('saveChanges');
+
+    // Function to open the modal
+    function openDetails() {
+        details.style.display = 'block';
+    }
+
+    // Function to close the modal
+    function closeDetailsFunc() {
+        details.style.display = 'none';
+    }
+
+    // Close the modal when the user clicks on the close button (x)
+    closeDetails.addEventListener('click', closeDetailsFunc);
+
+    // Close the modal when the user clicks anywhere outside of the modal
+    window.addEventListener('click', function(event) {
+        if (event.target === details) {
+            closeDetailsFunc();
+        }
+    });
+
+    // Example function to simulate opening the modal
+    // Replace this with your actual logic to trigger the modal opening
+    document.getElementById('yourButtonId').addEventListener('click', openDetails);
+
+    // Save changes button click handler
+    saveChangesButton.addEventListener('click', function() {
+        // Handle save changes logic here
+        // Then close the modal
+        closeDetailsFunc();
+    });
+});
+
+      </script>
+    <div class="profile-content">
+      <div id="profile-info" class="tab-content">
+        <h5>Profile Information:</h5>
+        <?php
+        // Fetch and display user profile information
+        if ($conn) {
+          // Check if user email and mobile number are set in session
+          if (!empty($_SESSION["UserEmailID"])) {
+            $userEmail = $_SESSION["UserEmailID"];
+          } else {
+            $userEmail = "";
+          }
+
+          if (!empty($_SESSION["UserMobileNumber"])) {
+            $userMobileNumber = $_SESSION["UserMobileNumber"];
+          } else {
+            $userMobileNumber = "";
+          }
+
+          $sql = "SELECT * FROM GetUserRegistrationDetails(?, ?)";
+          $params = array($userEmail, $userMobileNumber);
+          $stmt = sqlsrv_query($conn, $sql, $params);
+
+          if ($stmt) {
+            echo "<table>";
+            while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
+              echo "<tr>";
+              echo "<td class=\"table-head\">Name:</td><td>" . $row['UserName'] . "</td>";
+              echo "</tr>";
+              echo "<tr>";
+              echo "<td class=\"table-head\">Mobile Number:</td><td>" . $row['UserMobileNumber'] . "</td>";
+              echo "</tr>";
+              echo "<tr>";
+              echo "<td class=\"table-head\">Email:</td><td>" . $row['UserEmailID'] . "</td>";
+              echo "</tr>";
+              echo "<tr>";
+              echo "<td class=\"table-head\">Address:</td><td>" . $row['UserAddress'] . "</td>";
+              echo "</tr>";
+              echo "<tr>";
+              echo "<td class=\"table-head\">Unique Code:</td><td>" . $row['UserAllotedTokenNumber'] . "</td>";
+              echo "</tr>";
+            }
+            echo "</table>";
+            sqlsrv_free_stmt($stmt);
+          } else {
+            echo "Error executing SQL statement: " . print_r(sqlsrv_errors(), true);
+          }
+          sqlsrv_close($conn);
+        } else {
+          echo "Database connection error.";
+        }
+        ?>
+      </div>
+    </div>
+    <div class="organizer-content">
+      <div id="organizer-info" class="tab-content">
+        <h5>Organizer Race Information:</h5><br>
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Race Name</th>
+            <th>Race Location Latitude</th>
+            <th>Race Location Longitude</th>
+            <th>Race Date and Time</th>
+            <th>Race Last Admission Date and Time</th>
+            <th>Race Payment</th>
+            <th>Audience Ticket</th>
+            <th>Participant Fee</th>
+            <th>Book Race Organizers Alloted Token Number</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Marathon</td>
+            <td>40.712776</td>
+            <td>-74.005974</td>
+            <td>2024-06-01 08:00:00</td>
+            <td>2024-05-30 23:59:59</td>
+            <td>Yes</td>
+            <td>50</td>
+            <td>100</td>
+            <td>ABC123</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Triathlon</td>
+            <td>34.052235</td>
+            <td>-118.243683</td>
+            <td>2024-07-15 07:00:00</td>
+            <td>2024-07-10 23:59:59</td>
+            <td>No</td>
+            <td>75</td>
+            <td>150</td>
+            <td>XYZ789</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Cycling Race</td>
+            <td>51.507351</td>
+            <td>-0.127758</td>
+            <td>2024-08-20 09:00:00</td>
+            <td>2024-08-18 23:59:59</td>
+            <td>Yes</td>
+            <td>30</td>
+            <td>120</td>
+            <td>LMN456</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>5K Run</td>
+            <td>35.689487</td>
+            <td>139.691711</td>
+            <td>2024-09-05 06:30:00</td>
+            <td>2024-09-03 23:59:59</td>
+            <td>No</td>
+            <td>20</td>
+            <td>50</td>
+            <td>OPQ321</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>10K Run</td>
+            <td>48.856613</td>
+            <td>2.352222</td>
+            <td>2024-10-10 07:00:00</td>
+            <td>2024-10-08 23:59:59</td>
+            <td>Yes</td>
+            <td>35</td>
+            <td>70</td>
+            <td>RST654</td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Half Marathon</td>
+            <td>55.755825</td>
+            <td>37.617298</td>
+            <td>2024-11-15 08:00:00</td>
+            <td>2024-11-13 23:59:59</td>
+            <td>No</td>
+            <td>60</td>
+            <td>110</td>
+            <td>UVW987</td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Fun Run</td>
+            <td>-33.868820</td>
+            <td>151.209290</td>
+            <td>2024-12-25 09:00:00</td>
+            <td>2024-12-20 23:59:59</td>
+            <td>Yes</td>
+            <td>25</td>
+            <td>40</td>
+            <td>XYZ654</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="participant-content">
+      <div id="participants-info" class="tab-content">
+        <h5>Participants Management</h5><br>
+        <!-- Participants management content here -->
+        <table>
+          <tr>
+            <th>Sr. No</th>
+            <th>Race Name</th>
+            <th>Race Date and Time</th>
+            <th>Race Last Admission Date and Time</th>
+            <th>Race Payment</th>
+            <th>Payment Slip</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Marathon</td>
+            <td>2024-06-01 08:00:00</td>
+            <td>2024-05-30 23:59:59</td>
+            <td>Yes</td>
+            <td><a href="Payslip.php" download="Payslip.php">Download</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Triathlon</td>
+            <td>2024-07-15 07:00:00</td>
+            <td>2024-07-10 23:59:59</td>
+            <td>No</td>
+            <td><a href="payslip.html" download="Payslip.html">Download</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Cycling Race</td>
+            <td>2024-08-20 09:00:00</td>
+            <td>2024-08-18 23:59:59</td>
+            <td>Yes</td>
+            <td><a href="payslip.html" download="Payslip.html">Download</a></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>5K Run</td>
+            <td>2024-09-05 06:30:00</td>
+            <td>2024-09-03 23:59:59</td>
+            <td>No</td>
+            <td><a href="payslip.html" download="Payslip.html">Download</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>10K Run</td>
+            <td>2024-10-10 07:00:00</td>
+            <td>2024-10-08 23:59:59</td>
+            <td>Yes</td>
+            <td><a href="payslip.html" download="Payslip.html">Download</a></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Half Marathon</td>
+            <td>2024-11-15 08:00:00</td>
+            <td>2024-11-13 23:59:59</td>
+            <td>No</td>
+            <td><a href="payslip.html" download="Payslip.html">Download</a></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Fun Run</td>
+            <td>2024-12-25 09:00:00</td>
+            <td>2024-12-20 23:59:59</td>
+            <td>Yes</td>
+            <td><a href="payslip.php" download="Payslip.pdf">Download</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="audience-content">
+      <div id="audience-info" class="tab-content">
+        <h5>Audience Management</h5><br>
+        <table>
+          <tr>
+            <th>Sr. No</th>
+            <th>Race Name</th>
+            <th>Race Date and Time</th>
+            <th>Race Payment</th>
+            <th>Payment Slip</th>
+          </tr>
+          <tr>
+            <td>1</td>
+            <td>Marathon</td>
+            <td>2024-06-01 08:00:00</td>
+            <td>Yes</td>
+            <td><a href="slips/marathon.pdf" download="Marathon_Payment_Slip.pdf">Download</a></td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Triathlon</td>
+            <td>2024-07-15 07:00:00</td>
+            <td>No</td>
+            <td><a href="slips/triathlon.pdf" download="Triathlon_Payment_Slip.pdf">Download</a></td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Cycling Race</td>
+            <td>2024-08-20 09:00:00</td>
+            <td>Yes</td>
+            <td><a href="slips/cycling_race.pdf" download="Cycling_Race_Payment_Slip.pdf">Download</a></td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>5K Run</td>
+            <td>2024-09-05 06:30:00</td>
+            <td>No</td>
+            <td><a href="slips/5k_run.pdf" download="5K_Run_Payment_Slip.pdf">Download</a></td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>10K Run</td>
+            <td>2024-10-10 07:00:00</td>
+            <td>Yes</td>
+            <td><a href="slips/10k_run.pdf" download="10K_Run_Payment_Slip.pdf">Download</a></td>
+          </tr>
+          <tr>
+            <td>6</td>
+            <td>Half Marathon</td>
+            <td>2024-11-15 08:00:00</td>
+            <td>No</td>
+            <td><a href="slips/half_marathon.pdf" download="Half_Marathon_Payment_Slip.pdf">Download</a></td>
+          </tr>
+          <tr>
+            <td>7</td>
+            <td>Fun Run</td>
+            <td>2024-12-25 09:00:00</td>
+            <td>Yes</td>
+            <td><a href="Payslip.php" download="">Download</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <!-- profile area end -->
+
+  <!-- *********footer area********* -->
+  <footer>
+    <div class="footer-line-1">
+      <p>Agree all terms and condition for this platform</p>
+    </div>
+    <div class="footer-container">
+      <div class="footer-col-1">
+        <div class="footer-column">
+          <h4>SITEMAP</h4>
+          <ul>
+            <li><a href="#">Races</a></li>
+            <li><a href="#">Promotions</a></li>
+            <li>
+              <div class="footer-logo">
+                <a href="index.php">
+                  <img src="images/goracingslogo.png" alt="Go Race"></a>
+                <h4><span id="go">Go</span><span id="race">Racings</span></h4>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>INFORMATION</h4>
+          <ul>
+            <li><a href="#">Rules</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="../goracings/Terms and Conditions GoRacings.pdf" download="">Terms and Conditions</a></li>
+            <li><a href="#">Responsible Gaming</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-col-2">
+        <div class="footer-column">
+          <h4>CONTACT</h4>
+          <ul>
+            <li>
+              <div class="footer-logo">
+                <h4><span id="go">Go</span><span id="race">Racings</span></h4>
+              </div>
+            </li>
+            <li>GPC 1, MIDC Road, Satara,</br> Maharashtra - 415001, India.</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>SOCIAL</h4>
+          <ul>
+            <li>
+              <div class="footer-icon">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="http://www.youtube.com/@goracings"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/919764662357" target="_blank"><i class="fab fa-whatsapp"></i></a>
+              </div>
+            </li>
+            <li>E-Mail - goracings@swyomsoft.com</li>
+            <li>Help No. - 02040008444</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-line-2">
+      <p><span>&copy; 2024. Swyom, Swyomsoft And Swyom Enterprises.</span> All Rights Reserved.</p>
+    </div>
+    <div id="status-dot" class="dot"></div>
+  </footer>
+  <!-- **** footer area end **** -->
+  
+  <script>
+    function showLoginForm() {
+      var loginForm = document.getElementById("loginForm");
+      loginForm.style.display = "block";
+
+      var loginBtn = document.getElementById("loginBtn");
+      var logoutBtn = document.getElementById("logoutBtn");
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "block";
+    }
+
+    function logout() {
+      // Here you can implement logout functionality, like clearing session data, etc.
+      var loginForm = document.getElementById("loginForm");
+      loginForm.style.display = "none";
+
+      var loginBtn = document.getElementById("loginBtn");
+      var logoutBtn = document.getElementById("logoutBtn");
+      loginBtn.style.display = "block";
+      logoutBtn.style.display = "none";
+    }
+
+    // Function to open the specified category popup
+    function openPopup(category) {
+      document.getElementById("popup-" + category).style.display = "block";
+    }
+
+    // Function to close the specified category popup
+    function closePopup(category) {
+      document.getElementById("popup-" + category).style.display = "none";
+    }
+
+  </script>
+  
+</body>
+
+</html>

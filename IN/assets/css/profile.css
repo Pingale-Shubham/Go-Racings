@@ -1,0 +1,393 @@
+.profile-area {
+  width: 85%;
+  margin: 40px auto;
+  padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  min-height: 300px;
+  max-height: 550px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Profile navbar styles */
+.profile-navbar {
+  display: flex;
+  justify-content: center;  /* Centers the navbar content horizontally */
+  align-items: center;      /* Centers the navbar content vertically */
+  background-color: #FFAE42;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+
+.profile-navbar ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Corrected margin and spacing for list items */
+.profile-navbar li {
+  display: flex;
+  flex-grow: 1;
+}
+
+.profile-navbar a {
+  text-decoration: none;
+  justify-content: center;
+  text-align: center;  
+  align-items: center;
+  display: flex;
+  color: purple;
+  padding: 8px 12px;
+  border-radius: 25px;
+  width: 100%;
+}
+
+/* Adjust hover effect */
+.profile-navbar a:hover {
+  background-color: #ddd;
+  color: #a00d0d;
+}
+
+/* Active tab link styles */
+.profile-navbar a.active {
+  color: #fff;
+  border: 2px solid #fff;
+  background-color: transparent;
+}
+
+/* Tab content styles */
+.tab-content {
+  display: none;
+}
+
+/* Active tab content styles */
+.tab-content-active {
+  display: block;
+}
+
+.profile-area-details{
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 0;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+/* Participant-Prize-content, .Organizer-Prize-content  */
+.P-Prize-content, .O-Prize-content {
+  margin: 20px;
+}
+
+.tab-content {
+  padding: 20px;
+}
+
+/* Styling for the tables */
+.o-prize-table, .p-prize-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 5px;
+}
+
+.o-prize-table th, .o-prize-table td, .p-prize-table th, .p-prize-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.o-prize-table th, .p-prize-table th {
+  background-color: #f2f2f2;
+  color: #000;
+}
+
+.o-prize-table tr:nth-child(even), .p-prize-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Styling for buttons */
+
+.btn-primary,
+.edit-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.edit-btn:hover {
+  background-color: #45a049;
+}
+
+  /* Styling for the modal */
+  .Details {
+    display: none; /* Hidden by default */
+    position: absolute; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    top: 30%;
+    width: 60%; /* Full width */
+    height: 60%; /* Full height */
+    overflow: hidden; /* Hide scrollbar */
+    overflow-y: scroll; /* Enable vertical scrolling */
+  }
+
+  .Details-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+    border-radius: 10px;
+  }
+
+  .Details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .Details-header h2 {
+    margin: 0;
+  }
+
+  .Details-header .close {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .Details-header .close:hover, .Details-header .close:focus {
+    color: black;
+  }
+
+  .Details-body {
+    padding: 10px 0;
+  }
+
+  .Details-body label {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .Details-body input {
+    width: calc(100% - 20px);
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .Details-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+  }
+
+  #saveChanges {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  #saveChanges:hover {
+    background-color: #45a049;
+  }
+
+/* Profile Content Css */
+.profile-content {
+  margin: 20px;
+}
+
+.profile-content .tab-content {
+  padding: 20px;
+}
+
+.profile-content .tab-content table {
+  width: 60%;
+  margin-bottom: 20px;
+  border: none;  
+  border-collapse: collapse; 
+  font-size: 20px;
+}
+
+.profile-content .tab-content table td {
+  padding: 8px;
+  text-align: left;
+  border: none; /* Ensure no border for table cells */
+}
+
+.profile-content .tab-content table tr:nth-child(even) {
+  background-color: transparent;
+}
+
+.profile-content .tab-content .table-head {
+  font-weight: bold;
+  text-align: left;
+  padding-left: 15px;
+}
+
+.tab-content h5 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.profile-content .tab-content p {
+  margin: 10px 0;
+}
+
+/* Organizer, Participant, Audiance Content Css */
+.organizer-content,
+.participant-content,
+.audience-content {
+  margin: 20px;
+}
+
+.tab-content {
+  padding: 20px;
+
+}
+
+/* Styling for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 5px;
+  
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  color: #000;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* Styling for table header */
+table th {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  text-align: center;
+  background-color: #f2f2f2;
+  color: #000;
+}
+
+/* Styling for table cells */
+table td {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Center align for serial number */
+table td:first-child {
+  text-align: left;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .profile-area {
+    width: 95%; /* Adjusts container width for smaller screens */
+  }
+  .Details {
+    width: 80%; /* Adjusts modal width for smaller screens */
+    height: auto; /* Adjusts modal height for smaller screens */
+    top: 10%;
+  }
+  .Details-content {
+    width: 90%;
+    margin: 10% auto; /* Adjusts modal content for smaller screens */
+  }
+  .profile-navbar a {
+    font-size: 12px; /* Adjusts font size for smaller screens */
+    padding: 6px 10px;
+  }
+  .profile-content .tab-content table {
+    width: 100%; /* Adjusts table width for smaller screens */
+    font-size: 16px; /* Adjusts font size for smaller screens */
+  }
+
+
+  .organizer-content,
+  .participant-content,
+  .audience-content {
+    margin: 10px; /* Reduce margin for smaller screens */
+  }
+
+  .tab-content {
+    padding: 10px; /* Reduce padding for smaller screens */
+  }
+
+  table th, table td {
+    padding: 6px; /* Reduce padding in table cells for smaller screens */
+    font-size: 14px; /* Adjust font size for better readability */
+  }
+
+  table {
+    font-size: 14px; /* Adjust table font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-navbar a {
+    font-size: 10px; /* Further adjusts font size for very small screens */
+    padding: 4px 8px;
+  }
+  .Details {
+    width: 90%; /* Further adjusts modal width for very small screens */
+  }
+  .Details-content {
+    width: 95%;
+  }
+
+  .organizer-content,
+  .participant-content,
+  .audience-content {
+    margin: 5px; /* Further reduce margin for very small screens */
+  }
+
+  .tab-content {
+    padding: 5px; /* Further reduce padding for very small screens */
+  }
+
+  table th, table td {
+    padding: 4px; /* Further reduce padding in table cells for very small screens */
+    font-size: 12px; /* Further adjust font size for readability */
+  }
+
+  table {
+    font-size: 12px; /* Adjust table font size for very small screens */
+  }
+}

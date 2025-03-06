@@ -1,0 +1,156 @@
+.racing-norms {
+    width: 65%;
+    margin: 25px auto;
+    padding: 50px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+                rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, 
+                rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    height: 600px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow-y: auto;
+    justify-content: center;
+    color: #000;
+}
+
+.racing-norms h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+    color: #000;
+    /* text-decoration: underline; */
+}
+
+.racing-norms button {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.racing-norms button:hover {
+    background-color: #0056b3;
+}
+
+.policy-container {
+    padding: 20px;
+    text-align: justify;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.policy-container p {
+    margin-bottom: 20px;
+}
+
+.policy-container b {
+    color: #e74c3c;
+}
+
+.policy-container u {
+    color: #2980b9;
+    text-decoration: none;
+    border-bottom: 1px solid #2980b9;
+}
+
+.gaming-policy-contain {
+    padding: 20px;
+    text-align: justify;
+    color: #000;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.gaming-policy-contain h4 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.gaming-policy-contain h6 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px; /* Adjust as needed */
+    margin-bottom: 10px;
+}
+.gaming-policy-contain b {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color:#007bff;
+}
+.gaming-policy-contain strong {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #e74c3c;
+}
+
+/* Mobile view adjustments */
+@media only screen and (max-width: 768px) {
+    .racing-norms {
+        width: 90%;
+        padding: 10px 6px;
+        height: 500px;
+    }
+
+    .racing-norms h2 {
+        font-size: 18px;
+    }
+
+    .racing-norms button {
+        font-size: 14px;
+    }
+
+    .policy-container, .gaming-policy-contain {
+        font-size: 12px;
+        padding: 15px;
+    }
+
+    .gaming-policy-contain h4 {
+        font-size: 16px;
+        text-align: left;
+    }
+
+    .gaming-policy-contain h6 {
+        font-size: 16px;
+    }
+}
+
+/* Tablet view adjustments */
+@media only screen and (min-width: 769px) and (max-width: 1024px) {
+    .racing-norms {
+        width: 80%;
+        padding: 30px 50px;
+        height: auto;
+    }
+
+    .racing-norms h2 {
+        font-size: 22px;
+    }
+
+    .racing-norms button {
+        font-size: 15px;
+    }
+
+    .policy-container, .gaming-policy-contain {
+        font-size: 13px;
+        padding: 20px;
+    }
+
+    .gaming-policy-contain h4 {
+        font-size: 22px;
+    }
+
+    .gaming-policy-contain h6 {
+        font-size: 17px;
+    }
+}

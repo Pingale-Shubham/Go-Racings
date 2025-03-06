@@ -1,0 +1,210 @@
+.calendar-contain {
+  position: relative;
+  width: 50%;
+  max-width: 550px;
+  min-width: 300px;
+  /* padding: 5px; */
+  background-color: #f5f7f6;
+  /* border: 2px solid #ccc; */
+  color: #040605;
+  /* margin: 1rem auto; */
+  /* margin-top: 19px; */
+  height: 530px;
+  border-radius: 8px;
+  box-shadow: 5px 5px 72px rgba(30, 46, 50, 0.5);
+  overflow: hidden;
+}
+.calendar-titlebar {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 22px;
+  margin-bottom: -15px;
+}
+
+.calendar-Heading {
+  flex: 1;
+  font-size: 16px;
+  font-weight: bod;
+}
+
+.calendar-controls {
+  flex: 2;
+  display: flex;
+  align-items: center;
+}
+
+/* Styles for the labels */
+label {
+  font-size: 16px;
+  color: #333; /* Change color as needed */
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+/* Styles for the select elements */
+select {
+  -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  /* font-size: 14px; */
+  padding: 0;
+  /* border: 1px solid #ccc; */
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #555; /* Text color */
+}
+
+/* Style for the select options */
+select option {
+  font-size: 14px;
+  background-color: transparent; /* Background color */
+  color: #555; /* Text color */
+}
+
+/* Style for the select when hovered */
+select:hover {
+  border-color: #666; /* Change border color on hover */
+}
+
+/* Style for the select when focused */
+select:focus {
+  outline: none;
+  border-color: #007bff; /* Change border color when focused */
+}
+
+select::after {
+  content: '\25BC'; /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Ensure arrow does not interfere with select */
+}
+
+.calendar-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-navigation span {
+  margin: 0 5px; 
+  cursor: pointer;
+}
+
+/* If you want to align the icons vertically centered */
+.calendar-navigation span img {
+  vertical-align: middle;
+}
+.current-day {
+  background-color: #FF00FF;
+  color: #fff;
+  font-weight: bold;
+}
+.calendar-event-dates {
+  display: flex;
+  flex-direction: column;
+  /* padding: 30px; */
+}
+#sidebar {
+  margin: 20px;
+  margin-bottom: -12px;
+  width: auto;
+  max-height: 100px;
+  background-color: #ccc;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px;
+  font-size: 15px;
+  overflow-y: auto;
+}
+
+#main {
+  flex-grow: 1;
+  padding: 20px;
+}
+#sidebar h2 {
+  margin-top: 0;
+}
+#event-list {
+  list-style: none;  
+}
+#event-list li {
+  margin-bottom: 10px;
+}
+#event-list li span {
+  font-weight: bold;
+}
+#calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  text-align: center;
+}
+.month-header {
+  grid-column: 1 / -1;
+  background-color: #00ff00;
+  border-radius: 8px;
+  color: #fff;
+  padding: 10px;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.calendar-day {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+.calendar-day.selected-day{
+  border: 2px solid green;
+}
+.calendar-day:hover {
+  background-color: #eee;
+}
+#event-form {
+  display: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+}
+#event-form h2 {
+  margin-top: 0;
+}
+#event-form input[type="date"],
+#event-form input[type="text"],
+#event-form button {
+  margin-bottom: 10px;
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+#event-form button {
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+#event-form button:hover {
+  background-color: #555;
+}
+
+
+@media screen and (max-width: 768px) {
+
+  
+  .calendar-contain {
+    order: 2;
+    width: 100%;
+    max-width: none;
+    min-width: none;
+    margin-top: 10px;
+  }
+  
+}

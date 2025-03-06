@@ -1,0 +1,543 @@
+<?php
+
+// Start the session
+session_start();
+
+if (isset($_SESSION['LECaptcha']) && $_SESSION['LECaptcha'] === "yes") {
+  $emailCaptcha = true;
+  $_SESSION['GROTPFLG'] = true;
+} else {
+  $error_message = "User need to fill correct catcha.";
+  $emailCaptcha = false;
+}
+
+if (isset($_SESSION['GROTPFLG']) && $_SESSION['GROTPFLG'] === true) {
+  $emailCaptcha = true;
+  $_SESSION['LECaptcha'] = "yes";
+} else {
+  $error_message = "User need to fill correct catcha.";
+  $emailCaptcha = false;
+}
+
+
+$color = "brown";
+// Check if the session variable is set
+if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === true && $emailCaptcha === true) {
+
+  $LogInshowButton = true;
+  // $LogInWith = $_SESSION["loginCredential"];
+  $LogInWith = isset($_SESSION["loginCredential"]) ? $_SESSION["loginCredential"] : 'Unknown';
+
+  $error_message = "Welcome to GoRacings.";
+
+  // JavaScript code to create a popup alert with yellow color
+  echo '<script>';
+  echo 'setTimeout(function() {';
+  echo '    var alertMessage = document.createElement("div");';
+  echo '    alertMessage.innerHTML = "' . $error_message . '";';
+  echo '    alertMessage.style.backgroundColor = "yellow";'; // Set background color to yellow
+  echo '    alertMessage.style.color = "black";'; // Set text color to black
+  echo '    alertMessage.style.padding = "10px";'; // Add padding for better visibility
+  echo '    alertMessage.style.position = "fixed";'; // Position the alert message
+  echo '    alertMessage.style.top = "0";'; // Position at the top of the page
+  echo '    alertMessage.style.left = "50%";'; // Position horizontally in the middle
+  echo '    alertMessage.style.transform = "translateX(-50%)";'; // Center horizontally
+  echo '    alertMessage.style.zIndex = "9999";'; // Set z-index to ensure it's on top of other elements
+  echo '    document.body.appendChild(alertMessage);'; // Append the alert message to the body
+  echo '    setTimeout(function() {';
+  echo '        alertMessage.remove();'; // Remove the alert message after 15 seconds
+  echo '    }, 15 * 1000);'; // Display alert for 15 seconds (15 * 1000 milliseconds)
+  echo '}, 100);'; // Delay alert display by 100 milliseconds to ensure it's shown after page load
+  echo '</script>';
+
+} else {
+  $LogInshowButton = false;
+
+  if (isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'] === false) {
+    $error_message = "Use correct credentials.";
+  } else {
+    $error_message = "User must be login.";
+  }
+
+  // JavaScript code to display styled popup alert
+  echo '<script>';
+  echo 'setTimeout(function() {';
+  echo '    var alertMessage = document.createElement("div");';
+  echo '    alertMessage.innerHTML = "' . $error_message . '";';
+  echo '    alertMessage.style.backgroundColor = "yellow";'; // Set background color to yellow
+  echo '    alertMessage.style.color = "black";'; // Set text color to black
+  echo '    alertMessage.style.padding = "10px";'; // Add padding for better visibility
+  echo '    alertMessage.style.fontSize = "15px";';
+  echo '    alertMessage.style.position = "fixed";'; // Position the alert message
+  echo '    alertMessage.style.top = "0";'; // Position at the top of the page
+  echo '    alertMessage.style.left = "50%";'; // Position horizontally in the middle
+  echo '    alertMessage.style.transform = "translateX(-50%)";'; // Center horizontally
+  echo '    alertMessage.style.zIndex = "9999";'; // Set z-index to ensure it's on top of other elements
+  echo '    document.body.appendChild(alertMessage);'; // Append the alert message to the body
+  echo '    setTimeout(function() {';
+  echo '        alertMessage.remove();'; // Remove the alert message after 15 seconds
+  echo '    }, 15 * 1000);'; // Display alert for 15 seconds (15 * 1000 milliseconds)
+  echo '}, 100);'; // Delay alert display by 100 milliseconds to ensure it's shown after page load
+  echo '</script>';
+  
+  echo "<script>window.location.href = 'index.php';</script>";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta charset="utf-8">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+        async function checkStatus() {
+            try {
+                const response = await fetch('gRconnection.php');
+                const data = await response.json();
+                const statusDot = document.getElementById('status-dot');
+                if (data.connected) {
+                    statusDot.classList.add('connected');
+                    statusDot.classList.remove('disconnected');
+                } else {
+                    statusDot.classList.add('disconnected');
+                    statusDot.classList.remove('connected');
+                }
+            } catch (error) {
+                console.error('Error fetching status:', error);
+                const statusDot = document.getElementById('status-dot');
+                statusDot.classList.add('disconnected');
+                statusDot.classList.remove('connected');
+            }
+        }
+
+        // Check status on page load
+        checkStatus();
+        
+        // Optionally, check status periodically
+        setInterval(checkStatus, 5000); // every 5 seconds
+    </script>
+
+  <title>GoRacings - Speed to win</title>
+  <link rel="icon" type="image/x-icon" href="images/favicon/favicon.ico">
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+  <link rel="stylesheet" href="assets/css/animate.css">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="Login/login.css">
+  <link rel="stylesheet" href="assets/css/calender.css">
+</head>
+
+<body>
+  <div class="sub-header-1">
+    <div class="logo">
+      <a href="index.php">
+        <img src="images/goracingslogo.png" alt="Go Race"></a>
+      <h4><span id="go">Go</span><span id="race">Racings</span></h4>
+    </div>
+    <div class="help-num">
+      <p>सहायता नंबर : +91 02040008444</p>
+    </div>
+  </div>
+
+<!-- ***** हेडर क्षेत्र प्रारंभ ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <nav class="main-nav">
+            <!-- ***** मेनू प्रारंभ ***** -->
+            <ul class="nav">
+                <li><a href="index.php" class="active">होम</a></li>
+                <li class="dropdown-service">
+                    <button>सेवाएँ</button>
+                    <div class="dropdown-menu">
+                        <a href="services.php?section=Race-Audience-Ticket-Cancel">रेस दर्शक टिकट रद्द</a>
+                        <a href="services.php?section=Race-Participant-Ticket-Cancel">रेस प्रतिभागी टिकट रद्द</a>
+                        <a href="services.php?section=Organizer-Race-Cancel">रेस आयोजक रद्द</a>
+                        <a href="services.php?section=Race-Advertise">रेस विज्ञापन</a>
+                    </div>
+                </li>
+                <li><a href="gallery.php">गैलरी</a></li>
+                <li class="dropdown-norms">
+                    <button>रेसिंग नियम</button>
+                    <div class="dropdown-menu">
+                        <a href="racingnorms.php?section=terms-condition" class="dropdown-item">नियम और शर्तें</a>
+                        <a href="racingnorms.php?section=privacy-policy" class="dropdown-item">गोपनीयता नीति</a>
+                        <a href="racingnorms.php?section=refund-cancelation" class="dropdown-item">रिफंड और रद्दीकरण</a>
+                    </div>
+                </li>
+                <li><a href="login.php"><i class="fa fa-user"></i> लॉगिन/रजिस्टर</a></li>
+            </ul>
+            <a class='menu-trigger'>
+                <span>मेनू</span>
+            </a>
+            <!-- ***** मेनू समाप्त ***** -->
+        </nav>
+    </div>
+</header>
+<!-- ***** हेडर क्षेत्र समाप्त ***** -->
+
+  <!-- ***** second sub Header Area start ***** --><div class="sub-header-2">
+  <div class="menu-bar" onclick="toggleMenubar()"><i class="fa fa-bars"></i></div>
+  <div class="columns">
+    <div class="header-column-1">
+      <h6><a href="audience.php">दर्शक</a></h6>
+    </div>
+    <div class="header-column-2">
+      <h6><a href="participants.php">प्रतिभागी</a></h6>
+    </div>
+    <div class="header-column-3">
+      <h6><a href="organizer.php">आयोजक</a></h6>
+    </div>
+    <div class="header-column-4">
+      <h6><a href="profile.php">उपयोगकर्ता प्रोफ़ाइल</a></h6>
+    </div>
+  </div>
+  <div class="header-column-end">
+    <?php if ($LogInshowButton): ?>
+      <div class="dropdownIO">
+        <button style="padding: 5px;"><img src="./images/user-login.png" alt="login" style="height:35px; width: 35px; padding:5px; border-radius:50%; background-color: #90e1f8;"> स्वागत है,</button>
+          <div class="dropdownIO-options">
+            <a href="lUser.php"><i class="fa fa-user"></i> लॉगिन <span><?php echo $LogInWith; ?></span></a>
+            <a href="logout.php"><img src="./images/user-logout.png" alt="logout" style="height:35px; width: 35px; padding:5px;">लॉगआउट</a>
+          </div>
+      </div>
+    <?php endif; ?>
+  </div>
+</div>
+<script>
+  // JavaScript function to toggle the display of the menu items
+  function toggleMenubar() {
+    var menubar = document.querySelector('.columns');
+    if (menubar.style.display === 'flex' || menubar.style.display === '') {
+      menubar.style.display = 'none';
+    } else {
+      menubar.style.display = 'flex';
+    }
+  }
+</script>
+  <!-- ***** second sub Headerr Area End ***** -->
+
+  <!-- ***** calendar area start ***** -->
+  <div class="cal_banner_container">
+    <!-- ***** Calender Area Start ***** -->
+    <div class="calendar-contain">
+      <div class="calendar-titlebar">
+        <div class="calendar-Heading">
+        रेस कैलेंडर
+        </div>
+        <div class="calendar-controls">
+          <label for="select-year">साल:</label>
+          <select id="select-year" onchange="changeCalendar()"></select>
+          <label for="select-month">महीना:</label>
+          <select id="select-month" onchange="changeCalendar()">
+            <option value="0">जनवरी</option>
+            <option value="1">फरवरी</option>
+            <option value="2">मार्च</option>
+            <option value="3">अप्रैल</option>
+            <option value="4">मई</option>
+            <option value="5">जून</option>
+            <option value="6">जुलाई</option>
+            <option value="7">अगस्त</option>
+            <option value="8">सितंबर</option>
+            <option value="9">अक्टूबर</option>
+            <option value="10">नवंबर</option>
+            <option value="11">दिसंबर</option>
+          </select>
+          <div class="calendar-navigation">
+            <span><img class="icon icons8-Up" onclick="prevMonth()" width="16px" height="16px"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAxklEQVRYR+3VwQ2DMAyF4Z8NOkI36AodpZ2sjMAoHaWdoJWlIEXI4RHnwMWROAH2ZxuSiZPXdHJ+EjDagUcZ4Rwd5QjAkr9K4icQQkQBdfK1+BAiAvCShxG9gG3b6xGExtED8Gb+K6VbnNA3cRTQCl4DzNKNOALYC7oFdCMUQFXkAboQCvAGbkDrF2sBasQXuAIfb7NSgAtwB5bGTrcHWBFWhF3uUgC1wyqAen/4NExAdiA7kB3IDmQH5GGjHhg9DVV8eT8Bf2HqNiEP+isaAAAAAElFTkSuQmCC"></span>
+            <span><img class="icon icons8-Down" onclick="nextMonth()" width="16px" height="16px"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAA4UlEQVRYR+2WgQnCMBBFXzdwBSdwBUfRyXQER3EUN1AOEgnxLrkkhYCkUFpI7/+Xf1fajcnHNtmfBTCawDu0sFunuzAYL4CVwEpgJbAS+P8EDsAZeBj/DbUELsAznKpE7WMkxSfgCtwVhRKAmN+AF3AM1x+JGkAUkUINwgKo1X1BagDyYElMA3Cbi7gHoASRAzSZtwBYEClAs3krgAYhQxbnI73XBrbrLdCK0p3m69bbYv79e2cgF9Agms17WpCCdPU830lvAlFHIORw93xvALO33oXRBLw+uw/hsHEUmJ7ABzErNiGyzfJcAAAAAElFTkSuQmCC"></span>
+          </div>
+        </div>
+      </div>
+      <div class="calendar-event-dates">
+        <div id="sidebar">
+          <div class="calendar-date">
+            <span id="date-selected"></span>
+          </div>
+          <h6>कार्यक्रम</h6>
+          <ul id="event-list"></ul>
+        </div>
+        <div id="main">
+          <div id="calendar"></div>
+        </div>
+
+      </div>
+    </div>
+    <!-- ***** Calender Area End ***** -->
+
+    <!--  ***** Baner Area Start ****  -->
+    <div class="banner">
+      <div class="item item-5">
+        <div class="header-text">
+          <iframe src="https://www.youtube.com/embed/Ms3NNemT6oI?autoplay=1" title="YouTube Short - Racing Event"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen"></iframe>
+            <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/live_stream?channel=UCkJJWfMUVXz3VJGW-5FfAxA&autoplay=1" title="Live Stream" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+              <!-- http://www.youtube.com/@goracings -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ***** Baner Area end ***** -->
+    <div class="king-img">
+      <img src="images/The Great Maratha.jpg" alt="The Great Ruller">
+      <h4>"श्री छत्रपति शिवाजी महाराज"</h4>
+    </div>
+  </div>
+  <!-- ********* King Image End********* -->
+
+  <!-- **** Image Slider Start **** -->
+  <div class="img-slider-contain">
+    <div class="slider-container">
+      <div class="slider-image">
+        <div class="slide-img highlighted">
+          <img src="images/BikeRace.jpg" alt="1">
+        </div>
+        <div class="slide-img">
+          <img src="images/BullCartRace.jpg" alt="2">
+        </div>
+        <div class="slide-img">
+          <img src="images/bullock-cart-race.jpg" alt="3">
+        </div>
+        <div class="slide-img">
+          <img src="images/CarRace.jpg" alt="4">
+        </div>
+        <div class="slide-img">
+          <img src="images/CycleRace.jpg" alt="5">
+        </div>
+        <div class="slide-img">
+          <img src="images/DogRace.jpg" alt="6">
+        </div>
+        <div class="slide-img">
+          <img src="images/HorceRace.jpg" alt="7">
+        </div>
+        <div class="slide-img">
+          <img src="images/HumanRace.jpg" alt="8">
+        </div>
+        <div class="slide-img">
+          <img src="images/kambala-race.jpg" alt="9">
+        </div>
+        <div class="slide-img">
+          <img src="images/RacingCar.jpg" alt="10">
+        </div>
+        <div class="slide-img">
+          <img src="images/HorceRacings.jpg" alt="11">
+        </div>
+        <div class="slide-img">
+          <img src="images/motorboatrace.jpg" alt="12">
+        </div>
+        <div class="slide-img">
+          <img src="images/kambala-race.jpg" alt="13">
+        </div>
+        <div class="slide-img">
+          <img src="images/RacingCar.jpg" alt="14">
+        </div>
+        <div class="slide-img">
+          <img src="images/HorceRacings.jpg" alt="15">
+        </div>
+      </div>
+    </div>
+
+    <div class="control-btns">
+      <div onclick="prevSlide()" class="control-prev-btn">
+        <i class="fas fa-arrow-left"></i>
+      </div>
+      <div class="dots"></div>
+      <div onclick="nextSlide()" class="control-next-btn">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Get all slide images
+    const slideImages = document.querySelectorAll(".slide-img img");
+    const slideContainers = document.querySelectorAll(".slide-img");
+    const dotsContainer = document.querySelector('.dots');
+    let currentIndex = 0;
+
+    // Add dots dynamically
+    slideImages.forEach((item, index) => {
+      let dot = document.createElement('div');
+      dot.classList.add('dot');
+      if (index === 0) dot.classList.add('active');
+      dotsContainer.appendChild(dot);
+
+      // Add event listener to dots for navigation
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+      });
+    });
+
+    function goToSlide(index) {
+      // Scroll to the selected slide
+      const sliderWidth = document.querySelector('.slider-container').offsetWidth;
+      const imageWidth = document.querySelector('.slide-img').offsetWidth + 20; // Adjusted for margin
+      const slidesToShow = Math.floor(sliderWidth / imageWidth);
+      const start = Math.max(0, index - Math.floor(slidesToShow / 2));
+      const end = Math.min(slideImages.length - slidesToShow, start);
+      const finalIndex = end === slideImages.length - slidesToShow ? end : start;
+      document.querySelector('.slider-image').style.transform = `translateX(-${finalIndex * imageWidth}px)`;
+      // Update dot status
+      updateDots(index);
+      // Highlight active image
+      highlightImage(index);
+      currentIndex = index;
+    }
+
+    function updateDots(index) {
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[index].classList.add('active');
+    }
+
+    function highlightImage(index) {
+      slideContainers.forEach((container, idx) => {
+        if (idx === index) {
+          container.classList.add('highlighted');
+        } else {
+          container.classList.remove('highlighted');
+        }
+      });
+    }
+
+    function prevSlide() {
+      const newIndex = (currentIndex - 1 + slideImages.length) % slideImages.length;
+      goToSlide(newIndex);
+    }
+
+    function nextSlide() {
+      const newIndex = (currentIndex + 1) % slideImages.length;
+      goToSlide(newIndex);
+    }
+  </script>
+  <!-- **** image slider end **** -->
+
+  <!-- *********फुटर क्षेत्र********* -->
+  <footer>
+    <div class="footer-line-1">
+      <p>इस प्लेटफॉर्म के सभी शर्तों और नियमों से सहमत</p>
+    </div>
+    <div class="footer-container">
+      <div class="footer-col-1">
+        <div class="footer-column">
+          <h4>साइटमैप</h4>
+          <ul>
+            <li><a href="#">रेस</a></li>
+            <li><a href="#">प्रमोशन</a></li>
+            <li>
+              <div class="footer-logo">
+                <a href="index.php">
+                  <img src="images/goracingslogo.png" alt="Go Race"></a>
+                <h4><span id="go">Go</span><span id="race">Racings</span></h4>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>जानकारी</h4>
+          <ul>
+            <li><a href="#">नियम</a></li>
+            <li><a href="#">सामान्य प्रश्न</a></li>
+            <li><a href="racingnorms.php?section=privacy-policy">गोपनीयता नीति</a></li>
+            <li><a href="racingnorms.php?section=terms-condition">नियम और शर्तें</a></li>
+            <li><a href="racingnorms.php?section=responsible-Gaming">जिम्मेदार गेमिंग</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-col-2">
+        <div class="footer-column">
+          <h4>संपर्क करें</h4>
+          <ul>
+            <li>
+              <div class="footer-logo">
+                <h4><span id="go">Go</span><span id="race">Racings</span></h4>
+              </div>
+            </li>
+            <li>जीपीसी 1, एमआईडीसी रोड,</br> सातारा, महाराष्ट्र,<br> भारत - 415001</li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4>सामाजिक</h4>
+          <ul>
+            <li>
+              <div class="footer-icon">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="http://www.youtube.com/@goracings"><i class="fab fa-youtube"></i></a>
+                <a href="https://wa.me/919764662357" target="_blank"><i class="fab fa-whatsapp"></i></a>
+              </div>
+            </li>
+            <li>ई-मेल - goracings@swyomsoft.com</li>
+            <li>सहायता नंबर - 02040008444</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-line-2">
+      <p>
+        <span>&copy; 2024. Swyom, Swyomsoft And Swyom Enterprises.</span> सर्वाधिकार सुरक्षित।
+      </p>
+    </div>
+    <div class="connection_line2">
+      <div id="status-dot" class="connection_dot"></div>
+    </div>
+  </footer>
+  <!-- **** footer area end **** -->
+
+  <!-- Scripts -->
+  <script>
+    function showLoginForm() {
+      var loginForm = document.getElementById("loginForm");
+      loginForm.style.display = "block";
+
+      var loginBtn = document.getElementById("loginBtn");
+      var logoutBtn = document.getElementById("logoutBtn");
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "block";
+    }
+
+    function logout() {
+      // Here you can implement logout functionality, like clearing session data, etc.
+      var loginForm = document.getElementById("loginForm");
+      loginForm.style.display = "none";
+
+      var loginBtn = document.getElementById("loginBtn");
+      var logoutBtn = document.getElementById("logoutBtn");
+      loginBtn.style.display = "block";
+      logoutBtn.style.display = "none";
+    }
+
+    // Function to open the specified category popup
+    function openPopup(category) {
+      document.getElementById("popup-" + category).style.display = "block";
+    }
+
+    // Function to close the specified category popup
+    function closePopup(category) {
+      document.getElementById("popup-" + category).style.display = "none";
+    }
+
+  </script>
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/counter.js"></script>
+  <script src="assets/js/calendar.js"></script>
+  <script src="assets/js/custom.js"></script>
+</body>
+
+</html>

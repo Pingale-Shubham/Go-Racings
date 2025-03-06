@@ -1,0 +1,177 @@
+
+.audience-container {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  overflow-y: auto;
+  max-height: 600px;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  justify-content: center;
+  align-items: center;  
+}
+
+.audience-container h5{
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.audience-container .prize{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.audience-container #map {
+  width: calc(100% - 22px);
+  height: 200px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+label
+{
+  display: block;
+  padding: 10px;
+  padding-left: 0px;
+}
+
+input[type="text"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="file"],
+input[type="box"],
+textarea,
+select {
+  font-family: 'Poppins', sans-serif;
+  width: calc(100% - 22px);
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+  color: #000;
+  overflow: auto;
+}
+
+/* Style the select dropdown arrow */
+select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+}
+
+/* Style the select dropdown on hover */
+select:hover {
+  border: 2px solid #888;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #7d2ae8;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+button[type="submit"]:hover {
+  background-color: #5217db;
+}
+
+.file-input {
+  margin-bottom: 15px;
+} 
+
+.purple-button {
+  padding: 10px 20px;
+  background-color: #7d2ae8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 5px;
+    }
+
+    .purple-button:hover {
+      background-color: #5217db; /* Darken the color slightly on hover */
+    }
+
+    /* Styles for the container */
+.aproval-slider {
+  width: 100%; /* Adjust this according to your design */
+}
+
+/* Styles for the slider */
+.slider {
+  -webkit-appearance: none; 
+  width: 7%; /* Make the slider full-width */
+  height: 10px; /* Adjust the height as needed */
+  background: #ccc; /* Background color of the slider track */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set initial opacity */
+  transition: opacity 0.2s; /* Smooth transition for opacity */
+  border-radius: 9px;
+  margin: 8px;
+}
+
+/* Styles for the slider thumb */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none; /* Remove default appearance */
+  width: 18px; /* Set width of the thumb */
+  height: 18px; /* Set height of the thumb */
+  background: #7d2ae8; /* Background color of the thumb */
+  cursor: pointer; /* Change cursor to pointer */
+  border-radius: 50%;
+}
+
+/* Hover effect for the slider thumb */
+.slider::-webkit-slider-thumb:hover {
+  background: #5217db; /* Change background color on hover */
+}
+
+/* Active (pressed) state for the slider thumb */
+.slider::-webkit-slider-thumb:active {
+  background: #ff0800; /* Change background color when pressed */
+}
+
+/* Add a media query for responsiveness */
+@media only screen and (max-width: 600px) {
+  .audiance-container {
+    width: 100%;
+    padding: 15px;
+  }
+/* 
+#race_name{
+  width: calc(100% - 22px);
+  font-size: 12px;
+  font-weight: bold;
+  color: #000;
+  overflow: auto;
+}
+#race_name option {
+  width: 450px;
+  font-size: 9px;
+  cursor: pointer;
+  color: #000;
+  overflow: auto;
+  white-space: normal;
+}  */
+
+}

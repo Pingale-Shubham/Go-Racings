@@ -1,0 +1,93 @@
+
+.payment-slip {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border: 1.5px solid #000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    float: right;
+    margin-right: 20px;
+    padding: 8px 16px;
+    background-color: #0071f8;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: #4CAF50 ;
+}
+
+.headerslip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.headerslip .logo {
+    display: flex;
+    align-items: center;
+}
+
+.headerslip .logo {
+    text-decoration: none;
+}
+
+.headerslip .logo img {
+    max-width: 125%;
+    height: 100px;
+}
+
+.headerslip .logo h4 {
+    margin: 8px;
+}
+
+.headerslip .logo h4 span {
+    font-family: 'Comic Sans MS', sans-serif;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+#go {
+    color: #FF00FF;
+}
+
+#race {
+    color: #0071f8;
+}
+
+
+.payment-details {
+    padding: 10px;
+}
+
+.payment-details table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
+.payment-details th,
+.payment-details td {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px;
+    border: 1px solid #000;
+}
+
+@media only screen and (max-width: 600px) {
+    .headerslip {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .headerslip .logo,
+    .headerslip .num {
+        margin-bottom: 10px;
+    }
+}

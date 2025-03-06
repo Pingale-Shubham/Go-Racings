@@ -1,0 +1,103 @@
+
+.gallery-containers {
+    margin: 40px auto; /* Center the gallery */
+    width: 80%; /* Adjust width as needed */
+  }
+  
+  /* Styles for the list items */
+  .gallery-containers ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Adjust column width as needed */
+    gap: 20px; /* Adjust gap between items */
+  }
+ .gallery-containers img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    transition: transform 1000ms;
+}
+
+
+figure {
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+figure::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(0, 0, 0, 0.5);
+    transform-origin: center;
+    opacity: 0;
+    transform: scale(2);
+    transition: opacity 300ms;
+    border-radius: 50%; /* Added border-radius */
+}
+
+figcaption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    text-align: center;
+    padding: 1rem;
+    color: white;
+    font-size: 1.2rem;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 600ms, transform 600ms;
+}
+
+a:hover figure::after, /* Changed a:is(:hover, :focus) to a:hover */
+a:focus figure::after {
+    opacity: 1;
+}
+
+a:hover figcaption, /* Changed a:is(:hover, :focus) to a:hover */
+a:focus figcaption {
+    opacity: 1;
+    transition: opacity 600ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    figcaption {
+        transform: translate3d(0, 2rem, 0);
+    }
+
+    figure::after {
+        /* Removed border-radius */
+        opacity: 1;
+        transform: scale(0);
+        transition: transform 900ms;
+    }
+
+    a:hover figure::after, /* Changed a:is(:hover, :focus) to a:hover */
+    a:focus figure::after {
+        transform: scale(2.5);
+    }
+
+    a:hover figcaption, /* Changed a:is(:hover, :focus) to a:hover */
+    a:focus figcaption {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        transition: opacity 600ms 400ms, transform 600ms 400ms;
+    }
+
+    a:hover img, /* Changed a:is(:hover, :focus) to a:hover */
+    a:focus img {
+        transform: scale(1.2);
+    }
+}
